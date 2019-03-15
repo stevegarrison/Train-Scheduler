@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Train Scheduler</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="bg-dark mt-2 mb-3 p-5 text-center text-light col-md-12" id="train-header">Train Scheduler!</h1>
+        </div>
+    </div>
+    <!-- Begin Train Schedules div -->
+    <div class="container border mb-3" id="train-times-container">
+        <div class="row">
+            <div class="bg-secondary text-light col-md-12 p-1" id="train-times">Train Schedules</div>
+        </div>
+        <div class="row">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency (min)</th>
+                        <th scope="col">Next Arrival</th>
+                        <th scope="col">Minutes Away</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- End Train Schedules Div -->
+
+    <!-- Begin Add Train Form -->
+    <div class="container border mb-3" id="add-train-container">
+        <div class="row">
+            <div class="bg-secondary text-light col-md-12 p-1" id="add-train">Add Train</div>
+        </div>
+        <div class="row">
+            <form class="col-md-12">
+                <div class="form-group">
+                    <label class="mt-2">Train Name</label>
+                    <input type="text" class="form-control" id="user-train-name">
+                </div>
+                <div class="form-group">
+                    <label class="mt-2">Destination</label>
+                    <input type="text" class="form-control" id="user-train-destination">
+                </div>
+                <div class="form-group">
+                    <label class="mt-2">First Train Time (HH:mm - military time)</label>
+                    <input type="text" class="form-control" id="user-train-time">
+                </div>
+                <div class="form-group">
+                    <label class="mt-2">Frequency</label>
+                    <input type="number" class="form-control" id="user-frequency">
+                </div>
+                <button type="submit" class="btn btn-success mb-3 mt-3" id="user-submit">Submit</button>
+            </form>
+
+        </div>
+    </div>
+    <!-- End Add Train Form -->
+
+    <script src="app.js"></script>
+</body>
+
+</html>

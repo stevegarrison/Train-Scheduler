@@ -1,0 +1,32 @@
+body{
+    background: rgba(241, 245, 191, 0.199);
+}
+
+.form-control{
+    background: rgb(248, 249, 255);
+}
+
+#train-header{
+    border-radius: 10px;
+    font-weight: 800;
+}
+
+#train-times{
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+#train-times-container{
+    border-radius: 10px;
+    background: white;
+}
+
+#add-train{
+    border-radius: 5px;
+    font-weight: 600; 
+}
+
+#add-train-container{
+    border-radius: 10px;
+    background: white;
+}
