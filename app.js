@@ -17,8 +17,23 @@ database.ref().on("child_added", function (snapshot) {
     // Console.log the "snapshot" value (a point-in-time representation of the database)
     console.log(snapshot.val());
 
+        // THE MATH!
+        var firstTimeConverted = moment(snapshot.val().firstTrain, "HH:mm").subtract(1, "years");
+        console.log(firstTimeConverted);  
+        var currentTime = moment();
+        console.log(currentTime);
+        var diffTime = currentTime.diff(firstTimeConverted, "minutes");
+        console.log(diffTime);
+        var tRemainder = diffTime % snapshot.val().frequency;
+        console.log(tRemainder);
+        var tMinutesTillTrain = snapshot.val().frequency - tRemainder;
+        console.log(tMinutesTillTrain);
+        var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm a");
+        console.log(nextTrain);     
+    
+
     // var newTableRow = $("<tr>");
-    $("tbody").append("<tr><td>" + snapshot.val().name + "</td><td>" + snapshot.val().destination + "</td><td>" + snapshot.val().frequency + "</td><td>" + snapshot.val().next + "</td><td>" + snapshot.val().time + "</td></tr>");
+    $("tbody").append("<tr><td>" + snapshot.val().name + "</td><td>" + snapshot.val().destination + "</td><td>" + snapshot.val().frequency + "</td><td>" + nextTrain + "</td><td>" + tMinutesTillTrain + "</td></tr>");
 
     // If any errors are experienced, log them to console.
 }, function (errorObject) {
@@ -46,28 +61,15 @@ $("#user-submit").on("click", function () {
     console.log("Train time: " + trainTime);
     console.log("Train frequency: " + trainFrequency);
 
-    // THE MATH!
-    var firstTimeConverted = moment(trainTime, "HH:mm").subtract(1, "years").format("hh:mm a");
-    console.log(firstTimeConverted);     
-    var currentTime = moment().format("hh:mm a");
-    console.log(currentTime);
-    var firstTimeMoment = moment(firstTimeConverted);
-    var diffTime = moment().diff(moment(firstTimeMoment), "minutes");
-    console.log(diffTime);
-    var tRemainder = diffTime % trainFrequency;
-    console.log(tRemainder);
-    var tMinutesTillTrain = trainFrequency - tRemainder;
-    console.log(tMinutesTillTrain);
-    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-    console.log(nextTrain);      // This does not update train minutes left and next train actively
-
+    
     // Save new data to Firebase
     database.ref().push({
         name: trainName,
         destination: trainDestination,
-        time: tMinutesTillTrain,
+        firstTrain: trainTime,
+        // time: tMinutesTillTrain,
         frequency: trainFrequency,
-        next: nextTrain,
+        // next: nextTrain,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
     $("input").val(""); 
